@@ -29,6 +29,9 @@ SCENARIOS = [
 
 def main():
     with TestClient(app) as c:
+        if c.get("/api/recommendations?limit=1").json():
+            print("database already has data — skipping demo seed")
+            return
         recs = {}
         for s in SCENARIOS:
             r = c.post("/api/recommend", json=s).json()

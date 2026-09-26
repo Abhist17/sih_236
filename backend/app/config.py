@@ -8,7 +8,9 @@ DATA_DIR = Path(os.environ.get("PACKAI_DATA_DIR", ROOT / "data"))
 DATA_DIR.mkdir(parents=True, exist_ok=True)
 DATABASE_URL = os.environ.get("PACKAI_DATABASE_URL", f"sqlite:///{DATA_DIR / 'packai.db'}")
 FRONTEND_DIR = Path(os.environ.get("PACKAI_FRONTEND_DIR", ROOT / "frontend"))
-PUBLIC_BASE_URL = os.environ.get("PACKAI_PUBLIC_URL", "http://localhost:8000")
+# Render injects RENDER_EXTERNAL_URL; QR codes and report links must point at the public address.
+PUBLIC_BASE_URL = (os.environ.get("PACKAI_PUBLIC_URL") or os.environ.get("RENDER_EXTERNAL_URL")
+                   or "http://localhost:8000").rstrip("/")
 POW_DIFFICULTY = int(os.environ.get("PACKAI_POW_DIFFICULTY", "3"))  # leading hex zeros
 
 # Optional public-chain anchoring (Polygon / any EVM).  Leave empty to run fully offline.

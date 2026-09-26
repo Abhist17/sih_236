@@ -1,0 +1,24 @@
+# Render Blueprint — https://render.com/docs/blueprint-spec
+# One-click: https://render.com/deploy?repo=https://github.com/Abhist17/sih_236
+services:
+  - type: web
+    name: packai
+    runtime: docker
+    plan: free                 # 512 MB RAM is enough (app peaks ~330 MB); free instances sleep after 15 min idle
+    region: singapore          # closest Render region to India
+    branch: main
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /api/health
+    autoDeploy: true
+    envVars:
+      - key: PACKAI_SECRET_KEY
+        generateValue: true    # encrypts custodial PackChain keys
+      - key: PACKAI_SEED_DEMO
+        value: "1"             # free tier disk is ephemeral → re-seed demo data on every start
+      - key: PACKAI_POW_DIFFICULTY
+        value: "3"
+    # For data that survives restarts, switch to a paid plan and uncomment:
+    # disk:
+    #   name: packai-data
+    #   mountPath: /app/data
+    #   sizeGB: 1
