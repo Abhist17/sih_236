@@ -1,5 +1,7 @@
 # PackAI — AI-Based Intelligent Food Packaging Recommendation System
 
+**Live demo: https://packai.onrender.com** (free plan: the first load after 15 idle minutes takes about 40 s)
+
 > Smart India Hackathon problem statement: *AI-based intelligent food packaging material recommendation system for food commodities.*
 
 PackAI is a decision-support platform. It recommends the **packaging material, structure and full specification** for any food commodity: OTR, WVTR, thickness, sealing, mechanical strength, MAP gas mix and micro-perforations. It also predicts the **shelf life** the package will deliver and scores each option on **cost and sustainability**, and it tracks every packed batch from farm to shelf on a **blockchain** with QR codes.
