@@ -1,0 +1,9 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+data/packai.db
+data/.secret_key
+data/models/user_data.csv
+.env
+node_modules/
