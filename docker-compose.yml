@@ -1,0 +1,15 @@
+services:
+  packai:
+    build: .
+    ports: ["8000:8000"]
+    environment:
+      PACKAI_PUBLIC_URL: ${PACKAI_PUBLIC_URL:-http://localhost:8000}
+      PACKAI_SECRET_KEY: ${PACKAI_SECRET_KEY:-change-me-in-production}
+      PACKAI_EVM_RPC_URL: ${PACKAI_EVM_RPC_URL:-}
+      PACKAI_EVM_PRIVATE_KEY: ${PACKAI_EVM_PRIVATE_KEY:-}
+      PACKAI_EVM_CONTRACT: ${PACKAI_EVM_CONTRACT:-}
+    volumes:
+      - packai-db:/app/data
+    restart: unless-stopped
+volumes:
+  packai-db:
