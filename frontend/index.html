@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>PackAI — Smart Food Packaging</title>
+  <meta name="description" content="AI-based intelligent food packaging material recommendation system with shelf-life prediction, MAP design and blockchain traceability.">
+  <meta name="theme-color" content="#1f6f4a">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="icon" href="/icons/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/icons/icon-192.png">
+  <link rel="stylesheet" href="/css/app.css">
+  <script>
+    try { const t = localStorage.getItem("packai-theme"); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+  </script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="layout">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="/" data-link>
+        <img src="/icons/icon.svg" alt="" width="34" height="34">
+        <span><b>PackAI</b><small data-i18n="tagline">Smart food packaging</small></span>
+      </a>
+      <nav class="nav" aria-label="Main">
+        <a href="/" data-link data-i18n="nav.home">Dashboard</a>
+        <a href="/recommend" data-link class="nav-cta" data-i18n="nav.recommend">New recommendation</a>
+        <div class="nav-group" data-i18n="nav.tools">Tools</div>
+        <a href="/tools/map" data-link data-i18n="nav.map">MAP designer</a>
+        <a href="/tools/shelf-life" data-link data-i18n="nav.shelf">Shelf-life simulator</a>
+        <a href="/materials" data-link data-i18n="nav.materials">Materials explorer</a>
+        <a href="/commodities" data-link data-i18n="nav.commodities">Commodity library</a>
+        <div class="nav-group" data-i18n="nav.trace">Traceability</div>
+        <a href="/trace" data-link data-i18n="nav.batches">Batches &amp; QR</a>
+        <a href="/ledger" data-link data-i18n="nav.ledger">PackChain ledger</a>
+        <a href="/verify" data-link data-i18n="nav.verify">Verify a pack</a>
+        <div class="nav-group" data-i18n="nav.insight">Insight</div>
+        <a href="/history" data-link data-i18n="nav.history">History</a>
+        <a href="/ai" data-link data-i18n="nav.ai">AI model</a>
+        <a href="/about" data-link data-i18n="nav.about">Methodology</a>
+      </nav>
+      <div class="sidebar-foot">
+        <button class="btn ghost sm" id="langBtn" type="button" aria-label="Switch language">हिन्दी</button>
+        <button class="btn ghost sm" id="themeBtn" type="button" aria-label="Toggle dark mode">☾ Theme</button>
+      </div>
+    </aside>
+    <div class="main-wrap">
+      <header class="topbar">
+        <button class="btn ghost icon" id="menuBtn" type="button" aria-label="Open menu" aria-controls="sidebar" aria-expanded="false">☰</button>
+        <span class="topbar-title">PackAI</span>
+        <span id="healthDot" class="health" title="API status"></span>
+      </header>
+      <main id="main" tabindex="-1"></main>
+      <footer class="foot">
+        PackAI · physics-informed AI for food packaging · SIH problem statement "AI-based intelligent food packaging material recommendation" ·
+        <a href="/docs" target="_blank" rel="noopener">API docs</a>
+      </footer>
+    </div>
+  </div>
+  <div id="toast" role="status" aria-live="polite"></div>
+  <script src="/vendor/chart.umd.min.js"></script>
+  <script type="module" src="/js/app.js"></script>
+</body>
+</html>
