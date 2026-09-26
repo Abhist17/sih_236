@@ -57,6 +57,15 @@ Tests (115: physics, every commodity end to end, blockchain tamper detection, fu
 cd backend && ../.venv/bin/python -m pytest -q
 ```
 
+### Deploy to Render (public link)
+
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/Abhist17/sih_236)
+
+`render.yaml` defines a Docker web service. It uses the free plan in the Singapore region, checks `/api/health`, auto-deploys on push, generates a secret key and seeds demo data. QR codes and report links use Render's public URL automatically.
+
+- **Free plan:** the service sleeps after 15 minutes idle, and the first request after that takes about a minute to wake it. The disk is ephemeral, so the demo data is re-seeded on every start.
+- **Persistent data:** upgrade the plan and uncomment the `disk` block in `render.yaml`.
+
 > **Scanning QR codes from a phone:** set `PACKAI_PUBLIC_URL=http://<your-LAN-IP>:8000` in `.env` so the QR codes point at a reachable address.
 
 ---
