@@ -1,0 +1,170 @@
+{
+  "version": "20260925-162023",
+  "trained_at": "2026-09-25 16:20:23",
+  "n_samples": 4802,
+  "n_features": 61,
+  "n_classes": 18,
+  "n_user_samples": 2,
+  "classifier": {
+    "algorithm": "RandomForestClassifier",
+    "n_estimators": 150,
+    "min_samples_leaf": 3,
+    "max_depth": 22,
+    "class_weight": "balanced_subsample",
+    "random_state": 42
+  },
+  "holdout": {
+    "accuracy": 0.7929,
+    "macro_f1": 0.6685,
+    "top3_accuracy": 0.9969,
+    "n_test": 961
+  },
+  "leave_commodity_out": {
+    "accuracy": 0.514,
+    "macro_f1": 0.3111,
+    "top3_accuracy": 0.869,
+    "n_test": 1000,
+    "held_out_commodities": [
+      "apple",
+      "baby_corn",
+      "butter",
+      "cake",
+      "cherry",
+      "coconut_water",
+      "cucumber",
+      "edible_oil",
+      "egg",
+      "fish_lean",
+      "green_chilli",
+      "lassi",
+      "mutton",
+      "orange",
+      "peas_pod",
+      "potato",
+      "pulses",
+      "raisins",
+      "sapota",
+      "uht_milk"
+    ]
+  },
+  "regressors": {
+    "y_otr": {
+      "r2": 0.9814,
+      "mae_log10": 0.1036,
+      "n": 2099
+    },
+    "y_wvtr": {
+      "r2": 0.9774,
+      "mae_log10": 0.1617,
+      "n": 2149
+    },
+    "y_life": {
+      "r2": 0.9348,
+      "mae_log10": 0.1326,
+      "n": 4800
+    }
+  },
+  "feature_importance": [
+    {
+      "feature": "moisture",
+      "importance": 0.0725
+    },
+    {
+      "feature": "log_weight",
+      "importance": 0.0703
+    },
+    {
+      "feature": "fat",
+      "importance": 0.0699
+    },
+    {
+      "feature": "log_days",
+      "importance": 0.0569
+    },
+    {
+      "feature": "aw",
+      "importance": 0.056
+    },
+    {
+      "feature": "ph",
+      "importance": 0.0494
+    },
+    {
+      "feature": "protein",
+      "importance": 0.0488
+    },
+    {
+      "feature": "temp",
+      "importance": 0.0438
+    },
+    {
+      "feature": "log_o2_tol",
+      "importance": 0.0392
+    },
+    {
+      "feature": "log_rr",
+      "importance": 0.0352
+    },
+    {
+      "feature": "light",
+      "importance": 0.0299
+    },
+    {
+      "feature": "aw_c",
+      "importance": 0.0276
+    },
+    {
+      "feature": "process_retort",
+      "importance": 0.0259
+    },
+    {
+      "feature": "cat_sauce",
+      "importance": 0.0258
+    },
+    {
+      "feature": "map_benefit",
+      "importance": 0.0257
+    },
+    {
+      "feature": "cat_flour",
+      "importance": 0.024
+    },
+    {
+      "feature": "cat_rte",
+      "importance": 0.0234
+    },
+    {
+      "feature": "state_granular",
+      "importance": 0.0204
+    },
+    {
+      "feature": "rh",
+      "importance": 0.0203
+    },
+    {
+      "feature": "process_aseptic",
+      "importance": 0.0196
+    }
+  ],
+  "class_distribution": {
+    "breathable_perforated": 1068,
+    "polyolefin_mono": 773,
+    "ventilated_rigid": 509,
+    "metallized_laminate": 435,
+    "ventilated_mesh": 359,
+    "rigid_plastic": 336,
+    "pet_pe_laminate": 310,
+    "foil_laminate": 281,
+    "vacuum_barrier": 158,
+    "aseptic_carton": 151,
+    "map_tray": 136,
+    "rigid_glass_metal": 118,
+    "retort_pouch": 100,
+    "evoh_high_barrier": 25,
+    "hermetic_grain": 20,
+    "bulk_sack": 13,
+    "paper_based": 9,
+    "compostable": 1
+  },
+  "train_seconds": 2.7
+}
