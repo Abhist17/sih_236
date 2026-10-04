@@ -3,60 +3,164 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>PackAI — Smart Food Packaging</title>
-  <meta name="description" content="AI-based intelligent food packaging material recommendation system with shelf-life prediction, MAP design and blockchain traceability.">
-  <meta name="theme-color" content="#1f6f4a">
+  <title>PackAI | Smart Food Packaging Advisory Portal</title>
+  <meta name="description" content="Smart Food Packaging Advisory Portal: packaging material recommendation, shelf-life prediction, MAP design and QR traceability for Indian food commodities.">
+  <meta name="theme-color" content="#1c4587">
   <link rel="manifest" href="/manifest.webmanifest">
   <link rel="icon" href="/icons/icon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="/icons/icon-192.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;600;700&family=Noto+Sans+Devanagari:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/app.css">
   <script>
-    try { const t = localStorage.getItem("packai-theme"); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+    try {
+      const t = localStorage.getItem("packai-theme"); if (t === "contrast") document.documentElement.dataset.theme = t;
+      const f = localStorage.getItem("packai-font"); if (f) document.documentElement.style.setProperty("--fs", f);
+      document.documentElement.lang = localStorage.getItem("packai-lang") || "en";
+    } catch (e) {}
   </script>
 </head>
 <body>
-  <a class="skip" href="#main">Skip to content</a>
-  <div class="layout">
-    <aside class="sidebar" id="sidebar">
-      <a class="brand" href="/" data-link>
-        <img src="/icons/icon.svg" alt="" width="34" height="34">
-        <span><b>PackAI</b><small data-i18n="tagline">Smart food packaging</small></span>
-      </a>
-      <nav class="nav" aria-label="Main">
-        <a href="/" data-link data-i18n="nav.home">Dashboard</a>
-        <a href="/recommend" data-link class="nav-cta" data-i18n="nav.recommend">New recommendation</a>
-        <div class="nav-group" data-i18n="nav.tools">Tools</div>
-        <a href="/tools/map" data-link data-i18n="nav.map">MAP designer</a>
-        <a href="/tools/shelf-life" data-link data-i18n="nav.shelf">Shelf-life simulator</a>
-        <a href="/materials" data-link data-i18n="nav.materials">Materials explorer</a>
-        <a href="/commodities" data-link data-i18n="nav.commodities">Commodity library</a>
-        <div class="nav-group" data-i18n="nav.trace">Traceability</div>
-        <a href="/trace" data-link data-i18n="nav.batches">Batches &amp; QR</a>
-        <a href="/ledger" data-link data-i18n="nav.ledger">PackChain ledger</a>
-        <a href="/verify" data-link data-i18n="nav.verify">Verify a pack</a>
-        <div class="nav-group" data-i18n="nav.insight">Insight</div>
-        <a href="/history" data-link data-i18n="nav.history">History</a>
-        <a href="/ai" data-link data-i18n="nav.ai">AI model</a>
-        <a href="/about" data-link data-i18n="nav.about">Methodology</a>
-      </nav>
-      <div class="sidebar-foot">
-        <button class="btn ghost sm" id="langBtn" type="button" aria-label="Switch language">हिन्दी</button>
-        <button class="btn ghost sm" id="themeBtn" type="button" aria-label="Toggle dark mode">☾ Theme</button>
+  <a class="skip" href="#main" data-hi="मुख्य सामग्री पर जाएँ">Skip to main content</a>
+
+  <div class="gov-strip">
+    <div class="wrap strip-inner">
+      <div class="strip-left">
+        <span class="mini-flag" aria-hidden="true"><i></i><i></i><i></i></span>
+        <b data-hi="स्मार्ट इंडिया हैकाथॉन 2026">Smart India Hackathon 2026</b>
       </div>
-    </aside>
-    <div class="main-wrap">
-      <header class="topbar">
-        <button class="btn ghost icon" id="menuBtn" type="button" aria-label="Open menu" aria-controls="sidebar" aria-expanded="false">☰</button>
-        <span class="topbar-title">PackAI</span>
-        <span id="healthDot" class="health" title="API status"></span>
-      </header>
-      <main id="main" tabindex="-1"></main>
-      <footer class="foot">
-        PackAI · physics-informed AI for food packaging · SIH problem statement "AI-based intelligent food packaging material recommendation" ·
-        <a href="/docs" target="_blank" rel="noopener">API docs</a>
-      </footer>
+      <div class="strip-right">
+        <a href="#main" class="strip-link hide-sm" data-hi="मुख्य सामग्री पर जाएँ">Skip to main content</a>
+        <span class="sep hide-sm" aria-hidden="true">|</span>
+        <a href="/help#sitemap" data-link class="strip-link hide-sm" data-hi="साइटमैप">Sitemap</a>
+        <span class="sep hide-sm" aria-hidden="true">|</span>
+        <span class="font-ctl" role="group" aria-label="Text size" data-hi-aria="अक्षर आकार">
+          <button type="button" data-font="-1" aria-label="Decrease text size" data-hi-aria="अक्षर छोटे करें">A-</button>
+          <button type="button" data-font="0" aria-label="Normal text size" data-hi-aria="सामान्य अक्षर">A</button>
+          <button type="button" data-font="1" aria-label="Increase text size" data-hi-aria="अक्षर बड़े करें">A+</button>
+        </span>
+        <button type="button" id="contrastBtn" class="strip-btn" aria-pressed="false" aria-label="High contrast" data-hi-aria="उच्च कंट्रास्ट">◐</button>
+        <span class="lang-ctl" role="group" aria-label="Language / भाषा">
+          <button type="button" data-lang="hi" lang="hi">हिन्दी</button>
+          <button type="button" data-lang="en" lang="en">English</button>
+        </span>
+      </div>
     </div>
   </div>
+
+  <header class="gov-header">
+    <div class="wrap header-inner">
+      <a class="gov-brand" href="/" data-link>
+        <img src="/icons/icon.svg" alt="PackAI logo" width="64" height="64">
+        <span class="brand-text">
+          <span class="portal-hi" lang="hi">स्मार्ट खाद्य पैकेजिंग सलाहकार पोर्टल</span>
+          <span class="portal" lang="en">Smart Food Packaging Advisory Portal</span>
+          <span class="portal-sub" data-hi="PackAI — किसानों, FPO और खाद्य उद्यमों के लिए निःशुल्क सेवा">PackAI — a free service for farmers, FPOs and food businesses</span>
+        </span>
+      </a>
+      <div class="header-right">
+        <form class="header-search" id="headerSearch" role="search">
+          <label class="sr-only" for="hq" data-hi="उत्पाद खोजें">Search commodity</label>
+          <input id="hq" type="search" placeholder="Search commodity…" data-hi-placeholder="उत्पाद खोजें…">
+          <button type="submit" aria-label="Search" data-hi-aria="खोजें">
+            <svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M20 20l-4-4" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>
+          </button>
+        </form>
+        <span class="sih-badge"><b>SIH 2026</b><span data-hi="प्रोटोटाइप">Prototype</span></span>
+      </div>
+    </div>
+  </header>
+  <div class="tricolour" aria-hidden="true"><i></i><i></i><i></i></div>
+
+  <nav class="gov-nav" aria-label="Main">
+    <div class="wrap nav-inner">
+      <button class="nav-toggle" id="menuBtn" type="button" aria-expanded="false" aria-controls="navMenu">☰ <span data-hi="मेनू">Menu</span></button>
+      <ul class="menu" id="navMenu">
+        <li><a href="/" data-link data-hi="मुखपृष्ठ">Home</a></li>
+        <li><a href="/recommend" data-link class="menu-cta" data-hi="पैकेजिंग सलाह लें">Get Packaging Advice</a></li>
+        <li class="has-sub">
+          <button type="button" aria-expanded="false"><span data-hi="उपकरण">Tools</span> <span aria-hidden="true" class="caret">▼</span></button>
+          <ul class="sub">
+            <li><a href="/tools/map" data-link data-hi="MAP पैक डिज़ाइनर">MAP Pack Designer</a></li>
+            <li><a href="/tools/shelf-life" data-link data-hi="शेल्फ-लाइफ कैलकुलेटर">Shelf-life Calculator</a></li>
+            <li><a href="/materials" data-link data-hi="पैकेजिंग सामग्री">Packaging Materials</a></li>
+            <li><a href="/commodities" data-link data-hi="उत्पाद सूची">Commodity Library</a></li>
+          </ul>
+        </li>
+        <li class="has-sub">
+          <button type="button" aria-expanded="false"><span data-hi="ट्रेसबिलिटी">Traceability</span> <span aria-hidden="true" class="caret">▼</span></button>
+          <ul class="sub">
+            <li><a href="/trace" data-link data-hi="बैच और QR लेबल">Batches &amp; QR Labels</a></li>
+            <li><a href="/verify" data-link data-hi="पैक सत्यापित करें">Verify a Pack</a></li>
+            <li><a href="/ledger" data-link data-hi="PackChain लेजर">PackChain Ledger</a></li>
+          </ul>
+        </li>
+        <li class="has-sub">
+          <button type="button" aria-expanded="false"><span data-hi="संसाधन">Resources</span> <span aria-hidden="true" class="caret">▼</span></button>
+          <ul class="sub">
+            <li><a href="/history" data-link data-hi="रिपोर्ट इतिहास">Report History</a></li>
+            <li><a href="/ai" data-link data-hi="AI मॉडल">AI Model</a></li>
+            <li><a href="/about" data-link data-hi="कार्यप्रणाली">Methodology</a></li>
+          </ul>
+        </li>
+        <li><a href="/help" data-link data-hi="सहायता">Help &amp; FAQs</a></li>
+      </ul>
+      <span id="healthDot" class="health" title="Service status" aria-hidden="true"></span>
+    </div>
+  </nav>
+
+  <main id="main" tabindex="-1"></main>
+
+  <footer class="gov-footer">
+    <div class="wrap foot-grid">
+      <div>
+        <div class="foot-brand"><img src="/icons/icon.svg" alt="" width="34" height="34"><b>PackAI</b></div>
+        <p data-hi="खाद्य उत्पादों के लिए सही पैकेजिंग सामग्री चुनने, शेल्फ-लाइफ का अनुमान लगाने और पैक किए गए खाद्य की ट्रेसबिलिटी हेतु निःशुल्क पोर्टल।">A free portal to choose the right packaging material for food products, estimate shelf life and trace packed food from farm to shop.</p>
+      </div>
+      <div>
+        <h2 data-hi="सेवाएँ">Services</h2>
+        <ul>
+          <li><a href="/recommend" data-link data-hi="पैकेजिंग सलाह">Packaging advice</a></li>
+          <li><a href="/tools/map" data-link data-hi="MAP पैक डिज़ाइनर">MAP pack designer</a></li>
+          <li><a href="/tools/shelf-life" data-link data-hi="शेल्फ-लाइफ कैलकुलेटर">Shelf-life calculator</a></li>
+          <li><a href="/verify" data-link data-hi="पैक सत्यापन (QR)">Verify a pack (QR)</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 data-hi="उपयोगी लिंक">Useful links</h2>
+        <ul>
+          <li><a href="https://www.fssai.gov.in" target="_blank" rel="noopener">FSSAI</a></li>
+          <li><a href="https://eprplastic.cpcb.gov.in" target="_blank" rel="noopener" data-hi="CPCB प्लास्टिक EPR पोर्टल">CPCB Plastic EPR portal</a></li>
+          <li><a href="https://www.mofpi.gov.in" target="_blank" rel="noopener" data-hi="खाद्य प्रसंस्करण उद्योग मंत्रालय">Ministry of Food Processing Industries</a></li>
+          <li><a href="https://apeda.gov.in" target="_blank" rel="noopener">APEDA</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 data-hi="सहायता">Help</h2>
+        <ul>
+          <li><a href="/help" data-link data-hi="अक्सर पूछे जाने वाले प्रश्न">Frequently asked questions</a></li>
+          <li><a href="/help#guide" data-link data-hi="उपयोग मार्गदर्शिका">How to use the portal</a></li>
+          <li><a href="/about" data-link data-hi="कार्यप्रणाली">Methodology</a></li>
+          <li><a href="https://github.com/Abhist17/sih_236" target="_blank" rel="noopener" data-hi="स्रोत कोड">Source code</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-policy"><div class="wrap">
+      <a href="/help#terms" data-link data-hi="उपयोग की शर्तें">Terms of Use</a>
+      <a href="/help#privacy" data-link data-hi="गोपनीयता नीति">Privacy Policy</a>
+      <a href="/help#accessibility" data-link data-hi="सुगम्यता विवरण">Accessibility Statement</a>
+      <a href="/help#disclaimer" data-link data-hi="अस्वीकरण">Disclaimer</a>
+      <a href="/help#credits" data-link data-hi="फ़ोटो साभार">Photo Credits</a>
+      <a href="/help#sitemap" data-link data-hi="साइटमैप">Sitemap</a>
+    </div></div>
+    <div class="foot-bottom">
+      <div class="wrap foot-bottom-inner">
+        <span data-hi="टीम PackAI द्वारा स्मार्ट इंडिया हैकाथॉन 2026 हेतु विकसित। यह आधिकारिक सरकारी वेबसाइट नहीं है।">Developed by Team PackAI for Smart India Hackathon 2026. Not an official Government website.</span>
+        <span><span class="visitors"><span data-hi="आगंतुक">Visitors</span>: <b id="visitorCount">–</b></span> · <span data-hi="अंतिम अद्यतन">Last updated</span>: 05-10-2026</span>
+      </div>
+    </div>
+  </footer>
   <div id="toast" role="status" aria-live="polite"></div>
   <script src="/vendor/chart.umd.min.js"></script>
   <script type="module" src="/js/app.js"></script>
