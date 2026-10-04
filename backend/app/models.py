@@ -92,3 +92,9 @@ class Batch(Base):
     spec_hash: Mapped[str] = mapped_column(String(64))
     status: Mapped[str] = mapped_column(String(30), default="packed")
     genesis_tx: Mapped[str] = mapped_column(String(64))
+
+
+class Counter(Base):
+    __tablename__ = "counters"
+    key: Mapped[str] = mapped_column(String(40), primary_key=True)
+    value: Mapped[int] = mapped_column(Integer, default=0)

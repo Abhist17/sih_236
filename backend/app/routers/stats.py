@@ -8,6 +8,7 @@ from ..data.commodities import COMMODITIES
 from ..data.materials import MATERIAL_FAMILIES, SOLUTION_INDEX, SOLUTIONS
 from ..database import get_db
 from ..models import Actor, Batch, BlockRow, Feedback, RecommendationRecord, TxIndex
+from ..models import Counter as KVCounter
 from ..ml import service
 
 router = APIRouter(prefix="/api", tags=["dashboard"])
@@ -34,3 +35,16 @@ def stats(db: Session = Depends(get_db)):
                 holdout_accuracy=m.meta["holdout"]["accuracy"] if m else None,
                 top3_unseen=m.meta["leave_commodity_out"]["top3_accuracy"] if m else None),
     )
+
+
+@router.post("/visit")
+def visit(new: bool = True, db: Session = Depends(get_db)):
+    """Visitor counter shown in the footer; the browser calls it with new=true once per session."""
+    c = db.get(KVCounter, "visitors")
+    if c is None:
+        c = KVCounter(key="visitors", value=0)
+        db.add(c)
+    if new:
+        c.value += 1
+    db.commit()
+    return dict(visitors=c.value)
